@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
         matrix:
-          node-version: [10.x, 12.x, 14.x, 15.x]
+          node-version: [15.x]
     steps: 
       - uses: actions/checkout@v3
       - name: Use Node.js
@@ -20,5 +20,5 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps: 
-      - run: echo deploy to render
+      - run: curl -I "${{secrets.RENDER_WEBHOOK}}"
 
