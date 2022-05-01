@@ -20,5 +20,5 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps: 
-      - run: curl -I "${{secrets.RENDER_WEBHOOK}}"
+      - run: curl "${{secrets.RENDER_WEBHOOK}}"
 
