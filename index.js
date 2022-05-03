@@ -7,12 +7,11 @@ fastify.get('/', function (request, reply) {
   reply.send({ hello: 'world' })
 })
 
-const start = async () => {
-  try {
-    await fastify.listen(3000)
-  } catch (err) {
+// Run the server!
+fastify.listen(3000, function (err, address) {
+  if (err) {
     fastify.log.error(err)
     process.exit(1)
   }
-}
-start()
+  // Server is now listening on ${address}
+})
