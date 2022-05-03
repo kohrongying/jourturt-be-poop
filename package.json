@@ -7,12 +7,17 @@
     "test": "test"
   },
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test": "tap --reporter=list --watch",
+    "test-all": "tap --reporter=list"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "fastify": "^3.29.0"
+  },
+  "devDependencies": {
+    "pino-pretty": "^7.6.1",
+    "tap": "^16.1.0"
   }
 }
