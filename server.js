@@ -1,4 +1,6 @@
-const server = require('./app')({
+import server from './app.js';
+
+const customServer = server({
   logger: {
     level: 'info',
     prettyPrint: true
@@ -6,11 +8,11 @@ const server = require('./app')({
 })
 
 const port = 3000;
-const address = '0.0.0.0';
+const address =  process.env.SERVER_ADDRESS || 'localhost';
 
-server.listen(port, address, (err) => {
+customServer.listen(port, address, (err) => {
   if (err) {
-    server.log.error(err)
+    customServer.log.error(err)
     process.exit(1)
   }
 })

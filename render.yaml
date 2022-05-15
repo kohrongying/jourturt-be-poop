@@ -5,3 +5,6 @@ services:
     region: singapore
     buildCommand: npm install
     startCommand: npm start
+    envVars:
+      - key: SERVER_ADDRESS
+        value: 0.0.0.0
