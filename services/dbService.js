@@ -2,7 +2,7 @@ import { ddbDocClient } from './ddbDocClient.js';
 import { DeleteCommand, GetCommand, PutCommand, QueryCommand } from "@aws-sdk/lib-dynamodb";
 
 const USER_ID = '1'
-const TABLE_NAME = "table"
+const TABLE_NAME = process.env.DB_TABLE_NAME || "test_table"
 
 const getItem = async (eventDate) => {
     const params = {

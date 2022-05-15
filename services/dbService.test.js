@@ -11,7 +11,7 @@ t.beforeEach(() => {
     ddbMock.reset();
 })
 
-const TABLE_NAME = "table"
+const TABLE_NAME = "test_table"
 const USER_ID = '1'
 
 t.test('get item', async t => {

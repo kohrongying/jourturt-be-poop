@@ -1,8 +1,6 @@
 import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { ddbClient } from "./ddbClient.js";
 
-const REGION = 'ap-southeast-1';
-
 const marshallOptions = {
     // Whether to automatically convert empty strings, blobs, and sets to `null`.
     convertEmptyValues: false, // false, by default.
