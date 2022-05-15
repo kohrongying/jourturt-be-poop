@@ -14,10 +14,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.82.0",
+    "@aws-sdk/lib-dynamodb": "^3.87.0",
     "fastify": "^3.29.0"
   },
   "devDependencies": {
+    "aws-sdk-client-mock": "^0.6.2",
     "pino-pretty": "^7.6.1",
     "tap": "^16.1.0"
-  }
+  },
+  "type": "module"
 }

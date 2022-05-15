@@ -1,4 +1,4 @@
-const fastify = require('fastify')
+import fastify from 'fastify'
 
 const build = (opts={}) => {
   const app = fastify(opts)
@@ -11,4 +11,4 @@ const build = (opts={}) => {
   return app
 }
 
-module.exports = build
+export default build
