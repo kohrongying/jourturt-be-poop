@@ -21,6 +21,18 @@ const putItem = async (table, item) => {
     }
 }
 
-export { getItem, putItem };
+const deleteItem = async (table, key) => {
+    const params = {
+        TableName: table,
+        Key: key
+    }
+    try {
+        return await ddbDocClient.send(new DeleteCommand(params))
+    } catch (err) {
+        return err
+    }
+}
+
+export { getItem, putItem, deleteItem };
 
 
