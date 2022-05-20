@@ -9,7 +9,6 @@ t.test('get user schema', async t => {
         Name: name
     }
     t.strictSame(user.getSchemaKey(), expectedSchema)
-
     t.end()
 })
 
