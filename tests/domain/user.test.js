@@ -1,14 +1,11 @@
 import t from 'tap';
 
-import User from "../../domain/user.js"
+import { generateUser } from '../helper/factory.js'
 
 t.test('get user schema', async t => {
-    const uuid = "some-uuid"
-    const name = "a name"
-    const user = new User(uuid, name)
-    
+    const { id, name, user } = generateUser()
     const expectedSchema = {
-        Id: uuid,
+        Id: id,
         Name: name
     }
     t.strictSame(user.getSchemaKey(), expectedSchema)
