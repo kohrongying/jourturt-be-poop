@@ -9,6 +9,18 @@ const getItem = async (table, key) => {
     return await ddbDocClient.send(new GetCommand(params))
 }
 
-export { getItem };
+const putItem = async (table, item) => {
+    const params = {
+        TableName: table,
+        Item: item,
+    }
+    try {
+        return await ddbDocClient.send(new PutCommand(params))
+    } catch (err) {
+        return err
+    }
+}
+
+export { getItem, putItem };
 
 

@@ -4,9 +4,9 @@ import { mockClient } from "aws-sdk-client-mock";
 import { ddbDocClient } from '../../services/ddbDocClient.js';
 const ddbMock = mockClient(ddbDocClient);
 
-import { getItem } from '../../services/ddbService.js'
+import { getItem, putItem } from '../../services/ddbService.js'
 import { DeleteCommand, GetCommand, PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb'
-import { generateUser, generateEvent } from '../helper/factory.js'
+import { generateUser, generateEvent, generateEventLog } from '../helper/factory.js'
 
 t.beforeEach(() => {
     ddbMock.reset();
@@ -75,6 +75,41 @@ t.test('get event', async t => {
         });
     const item = await getItem(TABLE_NAME, event.getSchemaKey())
     t.test('check result', async t => t.strictSame(item.Item, { Id: id, Name: name, CreatedAt: timestamp, UserId: userId }))
+
+    t.end()
+})
+
+
+t.test('put event log item', async t => {
+    // given
+    const TABLE_NAME = "event-logs"
+    const { id, userId, timestamp, eventLog } = generateEventLog()
+    const item = eventLog.formatItem()
+    const params = {
+        TableName: TABLE_NAME,
+        Item: item
+    }
+    ddbMock
+        .on(PutCommand)
+        .resolves({
+            data: undefined
+        })
+        .on(PutCommand, params)
+        .resolves({
+            '$metadata': {
+              httpStatusCode: 200,
+              requestId: 'H913PV8K601QQ0D28M9S729NA3VV4KQNSO5AEMVJF66Q9ASUAAJG',
+              extendedRequestId: undefined,
+              cfId: undefined,
+              attempts: 1,
+              totalRetryDelay: 0
+            },
+            Attributes: undefined,
+            ConsumedCapacity: undefined,
+            ItemCollectionMetrics: undefined
+          });
+    const data = await putItem(TABLE_NAME, item)
+    t.test('check result', async t => t.strictSame(data['$metadata']['httpStatusCode'], 200))
 
     t.end()
 })
