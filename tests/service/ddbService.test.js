@@ -83,8 +83,12 @@ t.test('get event', async t => {
 t.test('put event log item', async t => {
     // given
     const TABLE_NAME = "event-logs"
-    const { id, userId, timestamp, eventLog } = generateEventLog()
-    const item = eventLog.formatItem()
+    const { id, eventId, timestamp, eventLog } = generateEventLog()
+    const item = {
+        Id: id,
+        EventId: eventId,
+        EventTimestamp: timestamp
+    }
     const params = {
         TableName: TABLE_NAME,
         Item: item

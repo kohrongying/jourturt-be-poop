@@ -1,3 +1,5 @@
+import EventLogRepository from "../repository/eventLogRepository.js"
+
 class EventLog {
     constructor(id, eventId, eventTs) {
         this.id = id
@@ -9,13 +11,6 @@ class EventLog {
         return {
             Id: this.id,
             EventId: this.eventId,
-        }
-    }
-
-    formatItem() {
-        return {
-            ...this.getSchemaKey(),
-            ...{ EventTimestamp: this.eventTs }
         }
     }
 }
