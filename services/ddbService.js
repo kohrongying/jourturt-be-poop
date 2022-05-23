@@ -14,11 +14,7 @@ const putItem = async (table, item) => {
         TableName: table,
         Item: item,
     }
-    try {
-        return await ddbDocClient.send(new PutCommand(params))
-    } catch (err) {
-        return err
-    }
+    return await ddbDocClient.send(new PutCommand(params))
 }
 
 const deleteItem = async (table, key) => {
@@ -26,13 +22,11 @@ const deleteItem = async (table, key) => {
         TableName: table,
         Key: key
     }
-    try {
-        return await ddbDocClient.send(new DeleteCommand(params))
-    } catch (err) {
-        return err
-    }
+    return await ddbDocClient.send(new DeleteCommand(params))
 }
 
-export { getItem, putItem, deleteItem };
+const queryTable = async (params) => {
+    return await ddbDocClient.send(new QueryCommand(params))
+}
 
-
+export { getItem, putItem, deleteItem, queryTable };
