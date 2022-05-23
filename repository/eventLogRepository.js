@@ -1,15 +1,36 @@
-import { putItem } from "../services/ddbService.js";
+import { putItem, queryTable } from "../services/ddbService.js";
+import { v4 as uuidv4 } from 'uuid';
+import EventLog from "../domain/eventLog.js";
 
 const TABLE_NAME = "ddb-last-poop-dev-event-logs"
 
-class EventLogRepository {
-    async add(id, eventId, timestamp) {
+const parseItem = (item) => {
+    return new EventLog(item.Id, item.EventId, item.EventTimestamp)
+}
+
+const EventLogRepository = {
+    add: async(eventId, timestamp) => {
         const item = {
-            Id: id,
+            Id: uuidv4(),
             EventId: eventId,
             EventTimestamp: timestamp
         }
-        return await putItem(TABLE_NAME, item)
+        await putItem(TABLE_NAME, item)
+        return parseItem(item)
+    },
+    query: async(eventId, startTime, endTime) => {
+        const params = {
+            TableName: TABLE_NAME,
+            ExpressionAttributeValues: {
+                ':start': startTime,
+                ':end': endTime,
+                ':eventID': eventId
+            },
+            KeyConditionExpression: 'EventId = :eventID',
+            FilterExpression: 'EventTimestamp between :start and :end'
+        }
+        const res = await queryTable(params)
+        return res.Items.map(item => parseItem(item))
     }
 }
 
