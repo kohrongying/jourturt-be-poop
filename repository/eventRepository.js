@@ -4,6 +4,10 @@ import Event from '../domain/event.js'
 
 const TABLE_NAME = "ddb-last-poop-dev-events"
 
+const parseItem = (item) => {
+    return new Event(item.Id, item.Name, item.UserId, item.CreatedAt)
+}
+
 const EventRepository = {
     add: async(userId, name) => {
         const item = {
@@ -13,7 +17,7 @@ const EventRepository = {
             Name: name
         }
         await putItem(TABLE_NAME, item)
-        return new Event(item.Id, item.Name, item.UserId, item.CreatedAt)
+        return parseItem(item)
     },
     query: async (userId) => {
         const params = {
@@ -23,7 +27,8 @@ const EventRepository = {
             },
             KeyConditionExpression: 'UserId = :userID'
         }
-        return await queryTable(params)
+        const res = await queryTable(params)
+        return res.Items.map(item => parseItem(item))
     },
 }
 
