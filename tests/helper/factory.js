@@ -7,8 +7,9 @@ const generateUser = () => {
     const id = uuidv4()
     const names = ['alice', 'ben', 'turt']
     const name = names[Math.floor(Math.random()*names.length)];
-    const user = new User(id, name)
-    return { id, name, user }
+    const email = `${name}@gmail.com`
+    const user = new User(id, name, email)
+    return { id, name, email, user }
 }
 
 const generateEvent = () => {

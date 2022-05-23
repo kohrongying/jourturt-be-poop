@@ -15,11 +15,13 @@ t.beforeEach(() => {
 t.test('get user', async t => {
     // given
     const TABLE_NAME = "users"
-    const { id, name, user } = generateUser()
+    const { id, name, email, user } = generateUser()
 
     const params = {
         TableName: TABLE_NAME,
-        Key: user.getSchemaKey()
+        Key: {
+            Email: email
+        }
     }
     ddbMock
         .on(GetCommand)
@@ -37,10 +39,10 @@ t.test('get user', async t => {
                 totalRetryDelay: 0
             },
             ConsumedCapacity: undefined,
-            Item: { Id: id, Name: name }
+            Item: { Id: id, Name: name, Email: email }
         });
-    const item = await getItem(TABLE_NAME, user.getSchemaKey())
-    t.test('check result', async t => t.strictSame(item.Item, user.getSchemaKey()))
+    const item = await getItem(TABLE_NAME, { Email: email})
+    t.test('check result', async t => t.strictSame(item.Item, { Id: id, Name: name, Email: email }))
 
     t.end()
 })

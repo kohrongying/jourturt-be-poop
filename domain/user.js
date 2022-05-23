@@ -1,14 +1,14 @@
+import EventRepository from '../repository/eventRepository.js'
+
 class User {
-    constructor(id, name) {
+    constructor(id, name, email) {
         this.id = id
         this.name = name
+        this.email = email
     }
 
-    getSchemaKey() {
-        return {
-            Id: this.id,
-            Name: this.name
-        }
+    async getEvents() {
+        return await EventRepository.query(this.id)
     }
 }
 
