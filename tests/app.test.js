@@ -1,5 +1,5 @@
 import { test } from 'tap';
-import build from './app.js'
+import build from '../app.js'
 
 test('requests the "/" route', async t => {
   const app = build()
