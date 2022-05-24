@@ -22,9 +22,9 @@ const generateEvent = (userID=null) => {
     return { id, name, userId, timestamp, event }
 }
 
-const generateEventLog = () => {
+const generateEventLog = (eventID=null) => {
     const id = uuidv4()
-    const eventId = uuidv4()
+    const eventId = eventID || uuidv4()
     const timestamp = new Date().getTime();
     const eventLog = new EventLog(id, eventId, timestamp)
     return { id, eventId, timestamp, eventLog }
