@@ -29,4 +29,8 @@ const queryTable = async (params) => {
     return await ddbDocClient.send(new QueryCommand(params))
 }
 
-export { getItem, putItem, deleteItem, queryTable };
+const ddbService = {
+    getItem,
+}
+
+export { getItem, putItem, deleteItem, queryTable, ddbService };
