@@ -1,11 +1,16 @@
-import { putItem, queryTable } from "../services/ddbService.js";
+import { putItem, ddbService } from "../services/ddbService.js";
 import { v4 as uuidv4 } from 'uuid';
 import Event from '../domain/event.js'
 
 const TABLE_NAME = "ddb-last-poop-dev-events"
 
 const parseItem = (item) => {
-    return new Event(item.Id, item.Name, item.UserId, item.CreatedAt)
+    return new Event(
+        item.Id, 
+        item.Name, 
+        item.UserId, 
+        item.CreatedAt
+    )
 }
 
 const EventRepository = {
@@ -27,7 +32,7 @@ const EventRepository = {
             },
             KeyConditionExpression: 'UserId = :userID'
         }
-        const res = await queryTable(params)
+        const res = await ddbService.queryTable(params)
         return res.Items.map(item => parseItem(item))
     },
 }

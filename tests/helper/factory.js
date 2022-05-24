@@ -12,9 +12,9 @@ const generateUser = () => {
     return { id, name, email, user }
 }
 
-const generateEvent = () => {
+const generateEvent = (userID=null) => {
     const id = uuidv4()
-    const userId = uuidv4()
+    const userId = userID || uuidv4()
     const names = ['poop', 'food', 'exercise']
     const name = names[Math.floor(Math.random()*names.length)];
     const timestamp = new Date().getTime();

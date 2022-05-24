@@ -31,6 +31,7 @@ const queryTable = async (params) => {
 
 const ddbService = {
     getItem,
+    queryTable,
 }
 
 export { getItem, putItem, deleteItem, queryTable, ddbService };
