@@ -19,7 +19,7 @@ const EventRepository = {
         await putItem(TABLE_NAME, item)
         return parseItem(item)
     },
-    query: async (userId) => {
+    findByUser: async (userId) => {
         const params = {
             TableName: TABLE_NAME,
             ExpressionAttributeValues: {

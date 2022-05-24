@@ -18,6 +18,7 @@
     "@aws-sdk/lib-dynamodb": "^3.87.0",
     "dayjs": "^1.11.2",
     "fastify": "^3.29.0",
+    "sinon": "^14.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
