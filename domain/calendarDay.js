@@ -12,11 +12,11 @@ class CalendarDay {
     }
 
     startOfDay() {
-        return this.day.startOf('date').valueOf();
+        return this.day.utcOffset(8).startOf('date').valueOf();
     }
     
     endOfDay() {
-        return this.day.endOf('date').valueOf();   
+        return this.day.utcOffset(8).endOf('date').valueOf();   
     }
 
 }
