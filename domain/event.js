@@ -15,8 +15,8 @@ class Event {
         }
     }
 
-    async getLogsByDay(calendarDay) {
-        return await EventLogRepository.query(this.id, calendarDay.startOfDay(), calendarDay.endOfDay())
+    async getLogsByDay(startTime, endTime) {
+        return await EventLogRepository.query(this.id, startTime, endTime)
     }
 }
 
